@@ -11,9 +11,9 @@ obj/
 .vs/
 .vscode/
 
-## Replit
-.replit
-replit.nix
+## Local environment
+.env
+.local
 .config/
 .upm/
 .cache/

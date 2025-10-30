@@ -1,40 +1,114 @@
-## EduBroadcast (ASP.NET Core)
+# EduBroadcast
 
-An ASP.NET Core MVC app providing:
+## Overview
+EduBroadcast is an ASP.NET Core 9.0 MVC application that provides fast tools for everyday classroom communication. The application has been successfully imported and configured to run in the local environment.
 
-- Quick Message broadcast (SMS/Email) using file-logged stubs
-- Digital "While You Were Out" absence log with public class pages
-- Parent-Teacher Conference Scheduler with booking and conflict prevention
+**Purpose**: A school communication platform offering message broadcasting, absence logging, and parent-teacher conference scheduling.
 
-Data is stored as JSON files in `App_Data/` so it runs without a database.
+**Current State**: ✅ Fully functional and running on port 8000
 
-### Prerequisites
-- .NET 8 SDK installed
+## Recent Changes
+- **October 30, 2025**: 
+  - Imported from GitHub and configured for local environment
+  - Renamed project from SchoolCommApp to EduBroadcast
+  - Updated all namespaces, branding, and references
+  - Configured to run on port 8000 with proper host settings
+  - Installed .NET 9.0 SDK
+  - Set up deployment configuration for autoscale
 
-### Run
+## Project Architecture
+
+### Technology Stack
+- **Framework**: ASP.NET Core 9.0 MVC
+- **Language**: C#
+- **Data Storage**: JSON files (no database required)
+- **Styling**: Bootstrap 5.3.3
+- **Icons**: Bootstrap Icons 1.11.3
+
+### Project Structure
+```
+├── Controllers/          # MVC Controllers
+│   ├── AbsenceController.cs
+│   ├── HomeController.cs
+│   ├── MessagesController.cs
+│   └── SchedulerController.cs
+├── Models/               # Domain models
+│   └── Domain.cs
+├── Views/                # Razor views
+│   ├── Absence/
+│   ├── Home/
+│   ├── Messages/
+│   ├── Scheduler/
+│   └── Shared/
+├── Services/             # Business logic
+│   └── Messaging.cs
+├── Data/                 # Data access layer
+│   └── JsonRepository.cs
+├── App_Data/             # JSON data storage
+│   ├── classes.json
+│   ├── templates.json
+│   ├── absences.json
+│   ├── slots.json
+│   ├── bookings.json
+│   └── outbox.log
+├── wwwroot/              # Static files
+│   └── css/
+└── Program.cs            # Application entry point
+```
+
+### Key Features
+1. **Quick Message Broadcasting**
+   - Create and manage message templates
+   - Broadcast to entire classes or individual students
+   - Send via SMS and/or Email (currently file-logged stubs)
+   - Access at: `/Messages/Templates` and `/Messages/Broadcast`
+
+2. **While You Were Out (Absence Log)**
+   - Create daily class updates for absent students
+   - Public class pages for viewing updates
+   - Track what was covered, handouts, and homework
+   - Access at: `/Absence` and `/Absence/Class/{classId}`
+
+3. **Conference Scheduler**
+   - Admin can create time slots for parent-teacher conferences
+   - Parents can book available slots
+   - Prevents double-booking
+   - Access at: `/Scheduler` (public) and `/Scheduler/Admin`
+
+### Configuration Details
+- **Port**: 8000 (configured for local development)
+- **Host**: localhost (for local development)
+- **Environment**: Development
+- **Data Persistence**: JSON files in `App_Data/` directory
+
+### Deployment
+- **Type**: Autoscale (stateless web application)
+- **Command**: `dotnet run`
+- Ready to publish via standard deployment systems
+
+## Development Notes
+
+### Running Locally
+The application runs automatically via the configured workflow. To manually run:
 ```bash
-cd "EduBroadcast"
 dotnet run
 ```
-Then open `https://localhost:5147` (or the URL shown in the console).
 
-### Features
-- Quick Message
-  - Manage templates: `/Messages/Templates`
-  - Broadcast to a class or selected students: `/Messages/Broadcast`
-  - Outgoing messages are appended to `App_Data/outbox.log`
-- While You Were Out
-  - Add entries for a class: `/Absence`
-  - Public class page: `/Absence/Class/{classId}`
-- Conference Scheduler
-  - Admin slots: `/Scheduler/Admin`
-  - Booking portal: `/Scheduler`
+### Data Storage
+All data is stored as JSON files in the `App_Data/` directory:
+- Demo data is automatically seeded on first run
+- Simple file-based persistence (not concurrent-safe)
+- Suitable for small deployments or demos
 
-### Configuration
-Replace the stub senders with Twilio/SendGrid integrations by implementing `ISmsSender` and `IEmailSender` in `Services/Messaging.cs` and wiring them in the controllers where used.
+### Future Enhancements
+To integrate real SMS/Email functionality:
+1. Implement `ISmsSender` and `IEmailSender` interfaces in `Services/Messaging.cs`
+2. Use Twilio for SMS or SendGrid for Email
+3. Configure API keys via environment variables or secrets manager
+4. Wire implementations in controllers
 
-### Notes
-- The app seeds demo classes, students, and templates on first run.
-- JSON persistence is simplistic and not concurrent-safe; fine for small deployments or demos.
-
-
+### Known Considerations
+- File-based JSON storage is not concurrent-safe
+- For production use with multiple users, consider migrating to a database
+- Current messaging uses file-logged stubs - integrate real services for production
+- LSP warnings about nullable references exist but don't affect functionality
