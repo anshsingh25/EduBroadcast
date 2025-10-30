@@ -1,0 +1,19 @@
+## .NET
+bin/
+obj/
+*.user
+*.suo
+*.userprefs
+*.cache
+*.dll
+*.pdb
+*.log
+.vs/
+.vscode/
+
+## Replit
+.replit
+replit.nix
+.config/
+.upm/
+.cache/

@@ -8,19 +8,19 @@
     "net9.0": []
   },
   "packageFolders": {
-    "/Users/apple/.nuget/packages/": {}
+    "/home/runner/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Volumes/D drive/asp-project/SchoolCommApp/SchoolCommApp.csproj",
-      "projectName": "SchoolCommApp",
-      "projectPath": "/Volumes/D drive/asp-project/SchoolCommApp/SchoolCommApp.csproj",
-      "packagesPath": "/Users/apple/.nuget/packages/",
-      "outputPath": "/Volumes/D drive/asp-project/SchoolCommApp/obj/",
+      "projectUniqueName": "/home/runner/workspace/EduBroadcast.csproj",
+      "projectName": "EduBroadcast",
+      "projectPath": "/home/runner/workspace/EduBroadcast.csproj",
+      "packagesPath": "/home/runner/.nuget/packages/",
+      "outputPath": "/home/runner/workspace/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/apple/.nuget/NuGet/NuGet.Config"
+        "/home/runner/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -68,7 +68,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.306/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/nix/store/j7g6vklfmgwzyj8r733qishfbb57la25-dotnet-sdk-9.0.302/share/dotnet/sdk/9.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

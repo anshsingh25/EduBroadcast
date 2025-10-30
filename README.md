@@ -1,4 +1,4 @@
-## SchoolCommApp (ASP.NET Core)
+## EduBroadcast (ASP.NET Core)
 
 An ASP.NET Core MVC app providing:
 
@@ -13,7 +13,7 @@ Data is stored as JSON files in `App_Data/` so it runs without a database.
 
 ### Run
 ```bash
-cd "SchoolCommApp"
+cd "EduBroadcast"
 dotnet run
 ```
 Then open `https://localhost:5147` (or the URL shown in the console).

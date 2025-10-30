@@ -1,44 +1,44 @@
-@model IReadOnlyList<SchoolCommApp.Models.ConferenceSlot>
+@model IReadOnlyList<EduBroadcast.Models.ConferenceSlot>
 @{
-	Layout = "~/Views/Shared/_Layout.cshtml";
-	ViewData["Title"] = "Conference Scheduler";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        ViewData["Title"] = "Conference Scheduler";
 }
 <h2 class="reveal">Available Time Slots</h2>
 @await Html.PartialAsync("~/Views/Shared/_Alerts.cshtml")
 <p class="reveal"><a href="/Scheduler/Admin"><i class="bi bi-gear me-1"></i>Admin</a></p>
 @if (Model == null || Model.Count == 0)
 {
-	<div class="empty-state reveal">
-		<div class="icon"><i class="bi bi-calendar2-week"></i></div>
-		<p class="mb-1">No slots published.</p>
-		<p class="sc-muted mb-0">Ask the teacher to add slots on the Admin page.</p>
-	</div>
+        <div class="empty-state reveal">
+                <div class="icon"><i class="bi bi-calendar2-week"></i></div>
+                <p class="mb-1">No slots published.</p>
+                <p class="sc-muted mb-0">Ask the teacher to add slots on the Admin page.</p>
+        </div>
 }
 else
 {
-	<div class="card reveal">
-		<div class="table-responsive">
-			<table class="table table-striped table-hover align-middle mb-0">
-				<thead><tr><th>Start (local)</th><th>End (local)</th><th>Status</th><th></th></tr></thead>
-				<tbody>
-				@foreach (var s in Model)
-				{
-					<tr>
-						<td>@s.StartUtc.ToLocalTime()</td>
-						<td>@s.EndUtc.ToLocalTime()</td>
-						<td>@(s.IsBooked ? "Booked" : "Available")</td>
-						<td>
-							@if (!s.IsBooked)
-							{
-								<a class="btn btn-primary btn-sm" href="/Scheduler/Book/@s.Id">Book</a>
-							}
-						</td>
-					</tr>
-				}
-				</tbody>
-			</table>
-		</div>
-	</div>
+        <div class="card reveal">
+                <div class="table-responsive">
+                        <table class="table table-striped table-hover align-middle mb-0">
+                                <thead><tr><th>Start (local)</th><th>End (local)</th><th>Status</th><th></th></tr></thead>
+                                <tbody>
+                                @foreach (var s in Model)
+                                {
+                                        <tr>
+                                                <td>@s.StartUtc.ToLocalTime()</td>
+                                                <td>@s.EndUtc.ToLocalTime()</td>
+                                                <td>@(s.IsBooked ? "Booked" : "Available")</td>
+                                                <td>
+                                                        @if (!s.IsBooked)
+                                                        {
+                                                                <a class="btn btn-primary btn-sm" href="/Scheduler/Book/@s.Id">Book</a>
+                                                        }
+                                                </td>
+                                        </tr>
+                                }
+                                </tbody>
+                        </table>
+                </div>
+        </div>
 }
 
 
