@@ -8,7 +8,7 @@ builder.Services.AddControllersWithViews();
 
 builder.WebHost.ConfigureKestrel(serverOptions =>
 {
-    serverOptions.ListenAnyIP(5150);
+    serverOptions.ListenAnyIP(8000);
 });
 
 var app = builder.Build();

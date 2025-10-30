@@ -3,41 +3,74 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
         ViewData["Title"] = "Conference Scheduler";
 }
-<h2 class="reveal">Available Time Slots</h2>
+
+<div class="row mb-4">
+        <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                                <h2 class="mb-2 reveal">
+                                        <i class="bi bi-calendar-check me-3" style="color: #10b981;"></i>
+                                        Conference Scheduler
+                                </h2>
+                                <p class="sc-muted reveal">Book your parent-teacher conference time slot.</p>
+                        </div>
+                        <a class="btn btn-outline-light reveal" href="/Scheduler/Admin">
+                                <i class="bi bi-gear me-2"></i>Admin Panel
+                        </a>
+                </div>
+        </div>
+</div>
+
 @await Html.PartialAsync("~/Views/Shared/_Alerts.cshtml")
-<p class="reveal"><a href="/Scheduler/Admin"><i class="bi bi-gear me-1"></i>Admin</a></p>
 @if (Model == null || Model.Count == 0)
 {
         <div class="empty-state reveal">
                 <div class="icon"><i class="bi bi-calendar2-week"></i></div>
-                <p class="mb-1">No slots published.</p>
-                <p class="sc-muted mb-0">Ask the teacher to add slots on the Admin page.</p>
+                <p class="mb-1 fs-5 fw-bold">No slots available yet</p>
+                <p class="sc-muted mb-3">Conference time slots haven't been published yet.</p>
+                <a href="/Scheduler/Admin" class="btn btn-primary">
+                        <i class="bi bi-gear me-2"></i>Go to Admin Panel
+                </a>
         </div>
 }
 else
 {
-        <div class="card reveal">
-                <div class="table-responsive">
-                        <table class="table table-striped table-hover align-middle mb-0">
-                                <thead><tr><th>Start (local)</th><th>End (local)</th><th>Status</th><th></th></tr></thead>
-                                <tbody>
-                                @foreach (var s in Model)
-                                {
-                                        <tr>
-                                                <td>@s.StartUtc.ToLocalTime()</td>
-                                                <td>@s.EndUtc.ToLocalTime()</td>
-                                                <td>@(s.IsBooked ? "Booked" : "Available")</td>
-                                                <td>
-                                                        @if (!s.IsBooked)
-                                                        {
-                                                                <a class="btn btn-primary btn-sm" href="/Scheduler/Book/@s.Id">Book</a>
-                                                        }
-                                                </td>
-                                        </tr>
-                                }
-                                </tbody>
-                        </table>
+        <div class="row g-3">
+        @foreach (var s in Model)
+        {
+                <div class="col-md-6 col-lg-4 reveal">
+                        <div class="card h-100">
+                                <div class="card-body">
+                                        <div class="mb-3">
+                                                <div class="d-flex align-items-center mb-2">
+                                                        <i class="bi bi-clock me-2" style="color: #10b981; font-size: 1.5rem;"></i>
+                                                        <div>
+                                                                <h5 class="card-title mb-0">@s.StartUtc.ToLocalTime().ToString("h:mm tt")</h5>
+                                                                <small class="sc-muted">@s.StartUtc.ToLocalTime().ToString("MMM dd, yyyy")</small>
+                                                        </div>
+                                                </div>
+                                                <p class="mb-0 small sc-muted">
+                                                        <i class="bi bi-arrow-right me-1"></i>
+                                                        Ends: @s.EndUtc.ToLocalTime().ToString("h:mm tt")
+                                                </p>
+                                        </div>
+                                        
+                                        @if (s.IsBooked)
+                                        {
+                                                <div class="badge" style="background: rgba(239,68,68,.2); color: #ef4444; width: 100%; padding: .5rem;">
+                                                        <i class="bi bi-x-circle me-1"></i>Booked
+                                                </div>
+                                        }
+                                        else
+                                        {
+                                                <a class="btn btn-success w-100" href="/Scheduler/Book/@s.Id">
+                                                        <i class="bi bi-calendar-plus me-2"></i>Book This Slot
+                                                </a>
+                                        }
+                                </div>
+                        </div>
                 </div>
+        }
         </div>
 }
 

@@ -1,16 +1,28 @@
 @if (TempData["Success"] != null)
 {
-	<div class="alert alert-success alert-dismissible fade show" role="alert">
-		@TempData["Success"]
-		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-	</div>
+        <div class="alert alert-dismissible fade show reveal mb-4" role="alert" style="background: linear-gradient(135deg, rgba(16,185,129,.15), rgba(5,150,105,.10)); border: 1px solid rgba(16,185,129,.3); color: var(--sc-text); border-radius: .75rem;">
+                <div class="d-flex align-items-center">
+                        <i class="bi bi-check-circle-fill me-3" style="color: #10b981; font-size: 1.5rem;"></i>
+                        <div class="flex-grow-1">
+                                <strong>Success!</strong><br>
+                                <span class="sc-muted">@TempData["Success"]</span>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+        </div>
 }
 @if (TempData["Error"] != null)
 {
-	<div class="alert alert-danger alert-dismissible fade show" role="alert">
-		@TempData["Error"]
-		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-	</div>
+        <div class="alert alert-dismissible fade show reveal mb-4" role="alert" style="background: linear-gradient(135deg, rgba(239,68,68,.15), rgba(220,38,38,.10)); border: 1px solid rgba(239,68,68,.3); color: var(--sc-text); border-radius: .75rem;">
+                <div class="d-flex align-items-center">
+                        <i class="bi bi-exclamation-triangle-fill me-3" style="color: #ef4444; font-size: 1.5rem;"></i>
+                        <div class="flex-grow-1">
+                                <strong>Error</strong><br>
+                                <span class="sc-muted">@TempData["Error"]</span>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+        </div>
 }
 
 
