@@ -3,58 +3,92 @@
         Layout = "~/Views/Shared/_Layout.cshtml";
         ViewData["Title"] = "Quick Message - Templates";
 }
-<div class="row">
-        <div class="col-md-8">
-                <h2 class="reveal">Message Templates</h2>
-                @await Html.PartialAsync("~/Views/Shared/_Alerts.cshtml")
+
+<div class="row mb-4">
+        <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center">
+                        <h2 class="mb-0 reveal">
+                                <i class="bi bi-layout-text-sidebar me-3" style="color: #6366f1;"></i>
+                                Message Templates
+                        </h2>
+                        <a class="btn btn-primary reveal" href="/Messages/Broadcast">
+                                <i class="bi bi-send me-2"></i>Go to Broadcast
+                        </a>
+                </div>
+        </div>
+</div>
+
+@await Html.PartialAsync("~/Views/Shared/_Alerts.cshtml")
+
+<div class="row g-4">
+        <div class="col-lg-8">
                 @if (Model == null || Model.Count == 0)
                 {
                         <div class="empty-state reveal">
                                 <div class="icon"><i class="bi bi-layout-text-sidebar"></i></div>
-                                <p class="mb-1">No templates yet.</p>
-                                <p class="sc-muted mb-0">Use the form to create your first message template.</p>
+                                <p class="mb-1 fs-5 fw-bold">No templates yet</p>
+                                <p class="sc-muted mb-0">Create reusable message templates to save time when broadcasting announcements.</p>
                         </div>
                 }
                 else
                 {
-                        <div class="card reveal">
-                                <div class="table-responsive">
-                                        <table class="table table-striped table-hover align-middle mb-0">
-                                                <thead><tr><th>Title</th><th>Body</th><th style="width:1%"></th></tr></thead>
-                                                <tbody>
-                                                @foreach (var t in Model)
-                                                {
-                                                        <tr>
-                                                                <td>@t.Title</td>
-                                                                <td>@t.Body</td>
-                                                                <td>
-                                                                        <form method="post" asp-action="DeleteTemplate" class="d-inline">
-                                                                                <input type="hidden" name="id" value="@t.Id" />
-                                                                                <button class="btn btn-sm btn-outline-danger">Delete</button>
-                                                                        </form>
-                                                                </td>
-                                                        </tr>
-                                                }
-                                                </tbody>
-                                        </table>
+                        <div class="row g-3">
+                        @foreach (var t in Model)
+                        {
+                                <div class="col-12 reveal">
+                                        <div class="card">
+                                                <div class="card-body">
+                                                        <div class="d-flex justify-content-between align-items-start mb-3">
+                                                                <div class="flex-grow-1">
+                                                                        <h5 class="card-title mb-2">
+                                                                                <i class="bi bi-envelope me-2" style="color: #6366f1;"></i>
+                                                                                @t.Title
+                                                                        </h5>
+                                                                        <p class="card-text sc-muted mb-0">@t.Body</p>
+                                                                </div>
+                                                                <form method="post" asp-action="DeleteTemplate" class="ms-3">
+                                                                        <input type="hidden" name="id" value="@t.Id" />
+                                                                        <button class="btn btn-sm btn-outline-danger" type="submit">
+                                                                                <i class="bi bi-trash me-1"></i>Delete
+                                                                        </button>
+                                                                </form>
+                                                        </div>
+                                                </div>
+                                        </div>
                                 </div>
+                        }
                         </div>
                 }
-                <a class="btn btn-primary mt-3 reveal" href="/Messages/Broadcast">Go to Broadcast</a>
         </div>
-        <div class="col-md-4">
-                <h4>Add Template</h4>
-                <form method="post" asp-action="AddTemplate" class="card card-body reveal">
-                        <div class="mb-2">
-                                <label class="form-label">Title</label>
-                                <input class="form-control" name="title" required />
+        
+        <div class="col-lg-4">
+                <div class="position-sticky" style="top: 20px;">
+                        <div class="card reveal">
+                                <div class="card-body">
+                                        <h4 class="card-title mb-4">
+                                                <i class="bi bi-plus-circle me-2" style="color: #10b981;"></i>
+                                                Add Template
+                                        </h4>
+                                        <form method="post" asp-action="AddTemplate">
+                                                <div class="mb-3">
+                                                        <label class="form-label">Template Title</label>
+                                                        <input class="form-control" name="title" placeholder="e.g., Permission Slip Reminder" required />
+                                                </div>
+                                                <div class="mb-4">
+                                                        <label class="form-label">Message Body</label>
+                                                        <textarea class="form-control" name="body" rows="6" placeholder="Enter your message content here..." required></textarea>
+                                                        <small class="sc-muted mt-1 d-block">
+                                                                <i class="bi bi-info-circle me-1"></i>
+                                                                This message will be sent via SMS/Email
+                                                        </small>
+                                                </div>
+                                                <button class="btn btn-success w-100">
+                                                        <i class="bi bi-save me-2"></i>Save Template
+                                                </button>
+                                        </form>
+                                </div>
                         </div>
-                        <div class="mb-2">
-                                <label class="form-label">Body</label>
-                                <textarea class="form-control" name="body" rows="4" required></textarea>
-                        </div>
-                        <button class="btn btn-success">Save</button>
-                </form>
+                </div>
         </div>
 </div>
 
