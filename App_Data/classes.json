@@ -1,0 +1,32 @@
+[
+  {
+    "Id": "3930d3174e7248d88d1fb8b3c1ccac86",
+    "Name": "Algebra I",
+    "Students": [
+      {
+        "Id": "d565a524363f4b479d86611ac043503d",
+        "FullName": "Alex Kim",
+        "ParentEmail": "parent1@example.com",
+        "ParentPhone": "\u002B15550000001"
+      },
+      {
+        "Id": "d9ad8fa558864b82beee0ef5fd514e91",
+        "FullName": "Sam Patel",
+        "ParentEmail": "parent2@example.com",
+        "ParentPhone": "\u002B15550000002"
+      }
+    ]
+  },
+  {
+    "Id": "ae44316ff75a4719b8bbafe784fb94b6",
+    "Name": "Biology",
+    "Students": [
+      {
+        "Id": "8084677cd6204fac99c9f5726239d7f6",
+        "FullName": "Jamie Lee",
+        "ParentEmail": "parent3@example.com",
+        "ParentPhone": "\u002B15550000003"
+      }
+    ]
+  }
+]

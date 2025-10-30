@@ -1,0 +1,31 @@
+@model SchoolCommApp.Models.ConferenceSlot
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Book Slot";
+}
+<h2>Book Slot</h2>
+<div class="card">
+    <div class="card-body">
+		<p><strong>Start:</strong> @Model.StartUtc.ToLocalTime()</p>
+		<p><strong>End:</strong> @Model.EndUtc.ToLocalTime()</p>
+        <form method="post" asp-action="Book" class="mt-2">
+			<input type="hidden" name="slotId" value="@Model.Id" />
+			<div class="mb-2">
+				<label class="form-label">Parent Name</label>
+				<input class="form-control" name="parentName" required />
+			</div>
+			<div class="mb-2">
+				<label class="form-label">Parent Email</label>
+				<input class="form-control" type="email" name="parentEmail" required />
+			</div>
+			<div class="mb-2">
+				<label class="form-label">Student Name</label>
+				<input class="form-control" name="studentName" required />
+			</div>
+			<button class="btn btn-primary">Confirm Booking</button>
+			<a class="btn btn-link" href="/Scheduler">Cancel</a>
+		</form>
+	</div>
+</div>
+
+

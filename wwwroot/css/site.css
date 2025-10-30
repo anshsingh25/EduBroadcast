@@ -1,0 +1,74 @@
+:root{
+	--sc-primary:#0d6efd;
+	--sc-bg:#0b1220;
+	--sc-card:#111a2b;
+	--sc-text:#dbe4ff;
+	--sc-muted:#93a1b2;
+}
+
+body{
+	background:linear-gradient(180deg,#0b1220 0%,#0e1626 100%);
+	color:var(--sc-text);
+	min-height:100vh;
+	display:flex;
+	flex-direction:column;
+}
+
+/* animated background glow */
+body::before{
+	content:"";
+	position:fixed;inset:-20% -10% auto -10%;height:60vh;pointer-events:none;
+	background:radial-gradient(40vw 40vw at 20% 20%, rgba(13,110,253,.18), transparent 60%),
+		radial-gradient(35vw 35vw at 80% 0%, rgba(32,201,151,.14), transparent 60%);
+	filter:blur(40px);opacity:.9;z-index:-1;animation:glow 22s ease-in-out infinite alternate;
+}
+@keyframes glow{from{transform:translateY(-10px)} to{transform:translateY(10px)}}
+
+.navbar{
+	background:rgba(0,0,0,.35)!important;
+	backdrop-filter:saturate(140%) blur(8px);
+}
+
+.card{
+	background-color:var(--sc-card);
+	border-color:rgba(255,255,255,.08);
+	color:var(--sc-text);
+	transition:transform .25s ease, box-shadow .25s ease;
+}
+.card:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.35)}
+
+.table{color:var(--sc-text);} 
+.table-striped>tbody>tr:nth-of-type(odd){--bs-table-accent-bg:rgba(255,255,255,.02);} 
+
+.btn-primary{box-shadow:0 6px 18px rgba(13,110,253,.35);} 
+.btn-outline-danger{border-color:#ff6b6b;color:#ff6b6b}
+.btn-outline-danger:hover{background:#ff6b6b;color:#0b1220}
+
+footer{
+	margin-top:auto;
+	padding:2rem 0;
+	color:var(--sc-muted);
+	border-top:1px solid rgba(255,255,255,.08);
+}
+
+.hero{
+	padding:2.5rem;
+	border-radius:.75rem;
+	background:linear-gradient(135deg, rgba(13,110,253,.15), rgba(32,201,151,.10));
+	border:1px solid rgba(255,255,255,.08);
+}
+
+/* reveal-on-scroll utility */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* empty state */
+.empty-state{border:1px dashed rgba(255,255,255,.15);background:rgba(255,255,255,.03);border-radius:.75rem;padding:2rem;text-align:center}
+.empty-state .icon{font-size:2rem;opacity:.9;margin-bottom:.5rem}
+
+/* subtle table borders */
+.table{--bs-border-color: rgba(255,255,255,.1)}
+
+.sc-muted{color:var(--sc-muted)}
+
+

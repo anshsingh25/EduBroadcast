@@ -1,0 +1,44 @@
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Home";
+}
+<div class="row">
+    <div class="col-12 mb-4 reveal">
+        <div class="hero">
+            <h1 class="mb-2">SchoolComm</h1>
+            <p class="sc-muted mb-0">Fast tools for everyday classroom communication.</p>
+        </div>
+    </div>
+    @await Html.PartialAsync("~/Views/Shared/_Alerts.cshtml")
+    <div class="col-md-4 mb-3 reveal">
+        <div class="card h-100">
+            <div class="card-body">
+                <h4 class="card-title"><i class="bi bi-megaphone me-2"></i>Quick Message</h4>
+                <p class="card-text sc-muted">Save templates and broadcast via SMS/Email.</p>
+                <a class="btn btn-primary" href="/Messages/Templates">Manage Templates</a>
+                <a class="btn btn-outline-light ms-2" href="/Messages/Broadcast">Broadcast</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3 reveal" style="transition-delay:.08s">
+        <div class="card h-100">
+            <div class="card-body">
+                <h4 class="card-title"><i class="bi bi-journal-text me-2"></i>While You Were Out</h4>
+                <p class="card-text sc-muted">Log what was covered and share public class updates.</p>
+                <a class="btn btn-primary" href="/Absence">Open</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3 reveal" style="transition-delay:.16s">
+        <div class="card h-100">
+            <div class="card-body">
+                <h4 class="card-title"><i class="bi bi-calendar-check me-2"></i>Conference Scheduler</h4>
+                <p class="card-text sc-muted">Publish slots, accept bookings, prevent double-booking.</p>
+                <a class="btn btn-primary" href="/Scheduler">Booking Portal</a>
+                <a class="btn btn-outline-light ms-2" href="/Scheduler/Admin">Admin</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,75 @@
+@model IReadOnlyList<SchoolCommApp.Models.AbsenceLog>
+@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "While You Were Out";
+	var classes = ViewBag.Classes as IReadOnlyList<SchoolCommApp.Models.ClassRoom>;
+}
+<div class="row">
+	<div class="col-md-7">
+		<h2 class="reveal">Recent Entries</h2>
+		@await Html.PartialAsync("~/Views/Shared/_Alerts.cshtml")
+		@if (Model == null || Model.Count == 0)
+		{
+			<div class="empty-state reveal">
+				<div class="icon"><i class="bi bi-journal-text"></i></div>
+				<p class="mb-1">No entries yet.</p>
+				<p class="sc-muted mb-0">Add what you covered today to help absent students catch up.</p>
+			</div>
+		}
+		else
+		{
+			<div class="card reveal">
+				<div class="table-responsive">
+					<table class="table table-striped table-hover table-sm align-middle mb-0">
+						<thead><tr><th>Date</th><th>Class</th><th>Covered</th></tr></thead>
+						<tbody>
+						@foreach (var a in Model)
+						{
+							var cls = classes!.FirstOrDefault(c => c.Id == a.ClassId);
+							<tr>
+								<td>@a.Date</td>
+								<td><a href="/Absence/Class/@a.ClassId">@cls?.Name</a></td>
+								<td>@a.WhatWeCovered</td>
+							</tr>
+						}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		}
+	</div>
+	<div class="col-md-5">
+		<h3>Add Entry</h3>
+		<form method="post" asp-action="Create" class="card card-body reveal">
+			<div class="mb-2">
+				<label class="form-label">Class</label>
+				<select class="form-select" name="classId" required>
+					<option value="">Choose...</option>
+					@foreach (var c in classes)
+					{
+						<option value="@c.Id">@c.Name</option>
+					}
+				</select>
+			</div>
+			<div class="mb-2">
+				<label class="form-label">Date</label>
+				<input type="date" class="form-control" name="date" value="@DateTime.UtcNow.ToString("yyyy-MM-dd")" />
+			</div>
+			<div class="mb-2">
+				<label class="form-label">What We Covered</label>
+				<textarea class="form-control" name="covered" rows="2"></textarea>
+			</div>
+			<div class="mb-2">
+				<label class="form-label">Handouts</label>
+				<input class="form-control" name="handouts" />
+			</div>
+			<div class="mb-2">
+				<label class="form-label">Homework</label>
+				<input class="form-control" name="homework" />
+			</div>
+			<button class="btn btn-success">Save</button>
+		</form>
+	</div>
+</div>
+
+
